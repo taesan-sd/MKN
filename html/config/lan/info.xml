@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+    <var id="email" type="text">
+        <name xml:lang="ko">이메일</name>
+        <name xml:lang="en">E-mail</name>
+    </var>
+    <var id="password" type="text">
+        <name xml:lang="ko">비밀번호</name>
+        <name xml:lang="en">Password</name>
+    </var>
+    <var id="last_name" type="text">
+        <name xml:lang="ko">성</name>
+        <name xml:lang="en">Last name</name>
+    </var>
+    <var id="first_name" type="text">
+        <name xml:lang="ko">이름</name>
+        <name xml:lang="en">First name</name>
+    </var>
+    <var id="gender" type="text">
+        <name xml:lang="ko">성별</name>
+        <name xml:lang="en">Gender</name>
+    </var>
+    <var id="birthday" type="text">
+        <name xml:lang="ko">생년월일</name>
+        <name xml:lang="en">Birthday</name>
+    </var>
+    <var id="nationality" type="text">
+        <name xml:lang="ko">국가</name>
+        <name xml:lang="en">Nationality</name>
+    </var>
+    <var id="city" type="text">
+        <name xml:lang="ko">도시</name>
+        <name xml:lang="en">City</name>
+    </var>
+    <var id="make" type="text">
+        <name xml:lang="ko">이름추출</name>
+        <name xml:lang="en">MAKE</name>
+    </var>
+</language>
