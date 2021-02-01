@@ -1,0 +1,199 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-3">
+                <div class="card profile-card">
+                    <div class="profile-header">&nbsp;</div>
+                    <div class="profile-body">
+                        <div class="image-area">
+                            <img src="<?=$user['user_img']?>" alt="AdminBSB - Profile Image" />
+                        </div>
+                        <div class="content-area">
+                            <h3><?=$user['first_name']." ".$user['last_name']?></h3>
+                            <p><?=$info['country_name']?></p>
+                            <p><?=$user['gender']?></p>
+                        </div>
+                    </div>
+                    <div class="profile-footer">
+                        <ul>
+                            <li>
+                                <span>Birthday</span>
+                                <span><?=$user['birthday']?></span>
+                            </li>
+                            <li>
+                                <span>Age</span>
+                                <span><?=$user['age']?></span>
+                            </li>
+                            <li>
+                                <span>Making date</span>
+                                <span><?=$user['date_time']?></span>
+                            </li>
+                        </ul>
+                        <?php 
+                        if($user['making'] == 'true') {
+                            echo '<button class="btn btn-success btn-lg waves-effect btn-block" id="status">Complete...</button>';
+                        } else {
+                            echo '<button class="btn btn-warning btn-lg waves-effect btn-block" id="status">Waiting...</button>';
+                        }
+                        ?>
+                    </div>
+                </div>
+
+                <div class="card card-about-me">
+                    <div class="header">
+                        <h2>ABOUT ME</h2>
+                    </div>
+                    <div class="body">
+                        <ul>
+                            <li>
+                                <div class="title">
+                                    <i class="material-icons">email</i>
+                                    Email
+                                </div>
+                                <div class="content">
+                                    <?=$user['email']?>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="title">
+                                    <i class="material-icons">location_on</i>
+                                    Location
+                                </div>
+                                <div class="content">
+                                    <?=$user['city']?>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                <div class="card">
+                    <div class="body">
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#profile_settings" aria-controls="settings" role="tab" data-toggle="tab">Making name card</a></li>
+                                <li role="presentation"><a href="#change_password_settings" aria-controls="settings" role="tab" data-toggle="tab">Change Password</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="profile_settings">
+                                    <form class="form-horizontal" id="make_name_form" onsubmit="return false">
+
+                                        <input type="hidden" name="no_mid" id="no_mid" value="<?=$user['no']?>">
+                                        <input type="hidden" name="last_name_ori" id="last_name_ori" value="<?=$user['last_name']?>">
+                                        <input type="hidden" name="first_name_ori" id="first_name_ori" value="<?=$user['first_name']?>">
+                                        <input type="hidden" name="email" id="email" value="<?=$user['email']?>">
+
+                                        <div class="form-group">
+                                            <label for="last_name_kr" class="col-sm-2 control-label">Last name KR</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-line">
+                                                    <input type="text" class="form-control" id="last_name_kr" name="last_name_kr" placeholder="한글 성" value="<?=$user_namecard['last_name_kr']?>" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="first_name_kr" class="col-sm-2 control-label">First name KR</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-line">
+                                                    <input type="text" class="form-control" id="first_name_kr" name="first_name_kr" placeholder="한글 이름" value="<?=$user_namecard['first_name_kr']?>" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="last_name_cn" class="col-sm-2 control-label">Last name CN</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-line">
+                                                    <input type="text" class="form-control" id="last_name_cn" name="last_name_cn" placeholder="한자 성" value="<?=$user_namecard['last_name_cn']?>">
+                                                </div>
+                                            </div>
+                                            <label for="first_name_cn" class="col-sm-2 control-label">First name CN</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-line">
+                                                    <input type="text" class="form-control" id="first_name_cn" name="first_name_cn" placeholder="한자 이름" value="<?=$user_namecard['first_name_cn']?>">
+                                                </div>
+                                            </div>
+                                            <label for="last_name_en" class="col-sm-2 control-label">Last name EN</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-line">
+                                                    <input type="text" class="form-control" id="last_name_en" name="last_name_en" placeholder="영문 성(한글 발음)" value="<?=$user_namecard['last_name_en']?>" required>
+                                                </div>
+                                            </div>
+                                            <label for="first_name_en" class="col-sm-2 control-label">First name EN</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-line">
+                                                    <input type="text" class="form-control" id="first_name_en" name="first_name_en" placeholder="영문 이름(한글 발음)" value="<?=$user_namecard['first_name_en']?>" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="first_name_meaning_kr" class="col-sm-2 control-label">Meaning KR</label>
+
+                                            <div class="col-sm-10">
+                                                <div class="form-line">
+                                                    <textarea class="form-control" id="first_name_meaning_kr" name="first_name_meaning_kr" rows="3" placeholder="한글 이름 의미"><?=$user_namecard['first_name_meaning_kr']?></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="first_name_meaning_en" class="col-sm-2 control-label">Meaning EN</label>
+
+                                            <div class="col-sm-10">
+                                                <div class="form-line">
+                                                    <textarea class="form-control" id="first_name_meaning_en" name="first_name_meaning_en" rows="3" placeholder="영문 이름 의미"><?=$user_namecard['first_name_meaning_en']?></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button type="submit" class="btn btn-danger" onclick="makeNameCard();">SUBMIT</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade in" id="change_password_settings">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="OldPassword" class="col-sm-3 control-label">Old Password</label>
+                                            <div class="col-sm-9">
+                                                <div class="form-line">
+                                                    <input type="password" class="form-control" id="OldPassword" name="OldPassword" placeholder="Old Password" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="NewPassword" class="col-sm-3 control-label">New Password</label>
+                                            <div class="col-sm-9">
+                                                <div class="form-line">
+                                                    <input type="password" class="form-control" id="NewPassword" name="NewPassword" placeholder="New Password" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="NewPasswordConfirm" class="col-sm-3 control-label">New Password (Confirm)</label>
+                                            <div class="col-sm-9">
+                                                <div class="form-line">
+                                                    <input type="password" class="form-control" id="NewPasswordConfirm" name="NewPasswordConfirm" placeholder="New Password (Confirm)" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-3 col-sm-9">
+                                                <button type="submit" class="btn btn-danger">SUBMIT</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+<!-- Custom Js -->
+<script src="../../js/pages/req/view.js"></script>

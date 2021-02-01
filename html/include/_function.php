@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://jsgetip.appspot.com/?getip"></script>
+
 <script>
 // 디바이스 체크
 function check_device() { 
@@ -10,6 +12,59 @@ function check_device() {
       }
    }
    setCookie("m_device", device_name, 365); 
+}
+
+function getBrowserType() { 
+  var _ua = navigator.userAgent; 
+  var rv = -1; 
+  //IE 11,10,9,8 
+  var trident = _ua.match(/Trident\/(\d.\d)/i);
+  if( trident != null ) {
+    if( trident[1] == "7.0" ) return rv = "IE" + 11;
+    if( trident[1] == "6.0" ) return rv = "IE" + 10;
+    if( trident[1] == "5.0" ) return rv = "IE" + 9;
+    if( trident[1] == "4.0" ) return rv = "IE" + 8;
+  }
+  //IE 7... 
+  if( navigator.appName == 'Microsoft Internet Explorer' ) return rv = "IE" + 7; //other 
+  var agt = _ua.toLowerCase(); 
+  if (agt.indexOf("chrome") != -1) return 'Chrome'; 
+  if (agt.indexOf("opera") != -1) return 'Opera'; 
+  if (agt.indexOf("staroffice") != -1) return 'Star Office'; 
+  if (agt.indexOf("webtv") != -1) return 'WebTV'; 
+  if (agt.indexOf("beonex") != -1) return 'Beonex'; 
+  if (agt.indexOf("chimera") != -1) return 'Chimera'; 
+  if (agt.indexOf("netpositive") != -1) return 'NetPositive'; 
+  if (agt.indexOf("phoenix") != -1) return 'Phoenix'; 
+  if (agt.indexOf("firefox") != -1) return 'Firefox'; 
+  if (agt.indexOf("safari") != -1) return 'Safari'; 
+  if (agt.indexOf("skipstone") != -1) return 'SkipStone'; 
+  if (agt.indexOf("netscape") != -1) return 'Netscape'; 
+  if (agt.indexOf("mozilla/5.0") != -1) return 'Mozilla'; 
+}
+
+function accessLog() {
+  var ip = getip(); // IP Address
+  var _date = new Date();
+  var date = _date.getFullYear()+("0"+(_date.getMonth()+1)).slice(-2)+("0"+_date.getDate()).slice(-2);
+  var time = _date.getHours()+":"+_date.getMinutes()+":"+_date.getSeconds();
+  var agent = navigator.userAgent.toLowerCase();
+  var browser = getBrowserType();
+  var device = getCookie("m_device");
+  var array = ({
+    ip:ip,
+    date:date,
+    time:time,
+    agent:agent,
+    browser:browser,
+    device:device
+  });
+  return array;
+  // console.log(ip);
+  // console.log(date);
+  // console.log(agent);
+  // console.log(browser);
+  // console.log(device);
 }
 
 // 쿠키 저장
@@ -41,6 +96,33 @@ function getCookie(cookieName) {
    }
    return unescape(cookieValue);
 }
+
+// 세션 저장
+function setSession(sessionName, value) {
+  if (window.sessionStorage) {
+    sessionStorage.setItem(sessionName, value);
+  }
+}
+
+// 세션 읽기
+function getSeesion(sessionName) {
+  if (window.sessionStorage) {
+    var result = sessionStorage.getItem(sessionName);
+  }
+  return result;
+}
+
+// 세션 삭제
+function deleteSeesion(sessionName) {
+  if (window.sessionStorage) {
+    if(sessionName) {
+      sessionStorage.removeItem(sessionName);
+    } else {
+      sessionStorage.clear();
+    }
+  }
+}
+
 
 // 로딩 활성
 function wrapWindowByMask() {
@@ -262,5 +344,43 @@ function chkPW(input_name) {
     console.log("비밀번호 통과"); 
     return true;
   }
+}
+
+// 로그인 체크
+function LoginCheck() {
+  var cookie_m_no = getCookie("m_no");
+  var cookie_m_id = getCookie("m_id");
+  var session_m_no = getSeesion("m_no");
+  var session_m_id = getSeesion("m_id");
+
+  if((aUrl(cookie_m_no) == aUrl(session_m_no)) && (aUrl(cookie_m_id) == aUrl(session_m_id))) {
+    // 로그인 완료
+    return true;
+
+  } else {
+    // 로그인 페이지 이동
+    return false;
+  }
+}
+
+// 로그아웃
+function Logout() {
+  deleteCookie('m_id');
+  deleteCookie('m_no');
+  deleteSeesion('m_id');
+  deleteSeesion('m_no');
+  pageMove(location.protocol+"//"+location.host);
+}
+
+// url 암호화
+function bUrl(str) {
+  _str = window.btoa(str);
+  return _str;
+}
+
+// url 복호화
+function aUrl(str) {
+  _str = window.atob(str);
+  return _str;
 }
 </script>

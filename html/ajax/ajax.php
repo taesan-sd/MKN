@@ -5,6 +5,13 @@ $type = $_POST['type'];
 $nationality = $_POST['nationality'];
 $table = $_POST['table'];
 
+$ip = $_POST['ip'];
+$date = $_POST['date'];
+$time = $_POST['time'];
+$agent = $_POST['agent'];
+$browser = $_POST['browser'];
+$device = $_POST['device'];
+
 $last_name = $_POST['last_name'];
 $first_name = $_POST['first_name'];
 $gender = $_POST['gender'];
@@ -90,6 +97,53 @@ switch ($type) {
 				'result' => 'false',
 				'message' => $error
 				);
+		}
+		break;
+
+	case 'count_log':
+		$sql = "select count(*) from $table where ipaddress='$ip' and regdate='$date'";
+		$result = mysqli_query($conn, $sql);
+		if($row = mysqli_fetch_array($result)) {
+			if($row[0] == 0) {
+				$sql = "insert into $table
+			                set ipaddress = '$ip',
+			                	ipaddress_hit = 1,
+			                    regdate = '$date',
+			                    time = '$time',
+			                    user_agent = '$agent',
+			                    browser = '$browser',
+			                    device = '$device'";
+			    $result = mysqli_query($conn, $sql);
+		        $error = $conn -> error;
+		        if($result) {
+		        	$results = array(
+						'result' => 'true',
+						'message' => 'insert success',
+					);
+
+		        } else {
+		        	$results = array(
+						'result' => 'false',
+						'message' => $error
+					);
+		        }
+			} else {
+				$sql = "update $table set ipaddress_hit=ipaddress_hit+1 where ipaddress='$ip'";
+				$result = mysqli_query($conn, $sql);
+				$error = $conn -> error;
+		        if($result) {
+		        	$results = array(
+						'result' => 'true',
+						'message' => 'update success',
+					);
+
+		        } else {
+		        	$results = array(
+						'result' => 'false',
+						'message' => $error
+					);
+		        }
+			}
 		}
 		break;
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.2">
+	<language xml:lang="ko">ko</language>
+	<language xml:lang="en">en</language>
+	<name xml:lang="ko">태산</name>
+	<name xml:lang="en">TAESAN</name>
+    <title xml:lang="ko">MKN - 태산 KOTACT 1.0</title>
+	<title xml:lang="en">MKN - TAESAN KOTACT 1.0</title>
+    <description xml:lang="ko">당신의 한글 이름을 만들어드립니다.</description>
+	<description xml:lang="en">Make your korean name.</description>
+	<version>1.0.0</version>
+    <date>2020-01-12</date>
+    <email>yoyo1379@tsstation.com</email>
+    <homepage>http://tsstation.com</homepage>
+</layout>

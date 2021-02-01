@@ -43,13 +43,20 @@
          <label class="col-lg-2 col-sm-3 col-xs-12 pd-xs-0 c1 text-sm-right text-xs-left gmarket-b">Nationality<br><span class="c4">국가</span></label>
          <select id="nationality" class="col-sm-6 col-xs-12 pd-sm-10 mg-sm-l10" onchange="selChange(this.value, 'nationality')"></select>
       </div>
-      <div class="layout-body mg-sm-b10 mg-xs-b30">
+      <div class="layout-body mg-sm-b10 mg-xs-b20">
          <label class="col-lg-2 col-sm-3 col-xs-12 pd-xs-0 c1 text-sm-right text-xs-left gmarket-b">City<br><span class="c4">도시</span></label>
          <input type="text" name="city" value="" placeholder="" class="col-sm-6 col-xs-12 mg-sm-l10 mg-xs-l0 inp_bg">
       </div>
-      <div class="layout-body thecenter_l col-sm-4-2 mg-sm-b10 text-lg-right">
-         <button class="float-r mg-sm-l10 mg-xs-l10" id="commit" onclick="signUp()">agree</button>
-         <button class="float-r mg-sm-l10 mg-xs-l0" id="cancel" onclick="pageMove('../')">cancel</button>
+      <div class="layout-body mg-sm-b10 pd-xs-0 pd-sm-0 pd-lg-0">
+      	 <label class="col-lg-2 col-sm-3 col-xs-12 pd-xs-0 c1 text-sm-right text-xs-left gmarket-b hidden-xs"><br><span class="c4"></span></label>
+      	 <div class="col-sm-6 col-xs-12 mg-sm-l10 mg-xs-l0 pd-xs-0 pd-sm-0 pd-lg-0">
+      	 	<p class="float-l c3 line-height-1_4">
+      	 		<span class="c3">Already registered? <a href="./login.php" class="c1">Login</a></span><br>
+      	 		<!--<span class="c3">이미 회원이십니까?</span> <a href="./login.php" class="c1">로그인</a>-->
+      	 	</p>
+	        <button class="float-r mg-sm-l10 mg-xs-l10" id="commit" onclick="signUp()">agree</button>
+	        <button class="float-r mg-sm-l10 mg-xs-l0" id="cancel" onclick="pageMove('../')">cancel</button>
+	     </div>
   	  </div>
    </section>
 </div>
@@ -66,10 +73,11 @@
    		lastday('select_year', 'select_month', 'select_day');
       	setNationality();
 
-    	if(!no) {
-			open_alert_popup('path is not valid.', '../', 0);
+    	if(no) {
+    		getUserData(no);
 		} else {
-			getUserData(no);
+			// open_alert_popup('path is not valid.', '../', 0);
+			console.log('not no');
 		}
    	})
 

@@ -8,8 +8,40 @@
 </section>
 
 <script type="text/javascript">
+	$(document).ready(function() {
+		open_alert_popup('path is not valid.', '../', 2000);
+
+		// 관리자페이지에서 업로드
+		// var curl = bUrl(window.location.href);
+		// var result = LoginCheck();
+		// if(!result) {
+		// 	pageMove('../member/login.php?curl='+curl);
+		// } else {
+		// 	var session_m_no = aUrl(getSeesion("m_no"));
+		// 	var session_m_id = aUrl(getSeesion("m_id"));
+		// 	$.ajax({
+	 //            url: '../ajax/ajax.member.php',
+	 //            type:'post',
+	 //            dataType:'json',
+	 //            data:{
+	 //               type:"get_user_info",
+	 //               email:session_m_id
+	 //            },
+	 //            success: function(data) {
+	 //               if(data.result == "true") {
+	 //                  console.log(data);
+	 //               } else {
+	 //                  showBasicMessage(data.message);
+	 //                  // console.log(data.message);
+	 //               }
+	 //            }, error:function(request,status,error) {
+	 //                // alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	 //            }
+	 //        });
+		// }
+	});
+
 	function pageView(table) {
-		var url = './upload.php?type='+table;
-		location.href = url;
+		pageMove('./upload.php?type='+table);
 	}
 </script>

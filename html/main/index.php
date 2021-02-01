@@ -1,3 +1,10 @@
+<?php
+   // $access_ip = $_SERVER['REMOTE_ADDR']; // IP adress
+   // $os = $this->getOS(); // 접속 OS 정보
+   // $browser = $this->getBrowser(); // 브라우저 접속 정보
+   // $date = date("YmdHis"); // 오늘 날짜시간
+?>
+
 <div class="col-lg-12 col-sm-12 col-xs-12 thecenter pd-lg-t0 pd-lg-b0 pd-sm-t80 pd-sm-b80 pd-xs-t80 pd-xs-b80 text-xs-center gmarket-l">
    <section class="col-lg-4 col-sm-12 col-xs-12 text-lg-right text-sm-center mg-lg-l100">
       <img src="../img/title.png" class="width-xs-50">
@@ -53,11 +60,51 @@ if(!wcs_add) var wcs_add = {};
 
 <script type="text/javascript">
    $(document).ready(function() {
+      var data = accessLog();
+      check_device();
+      countLog(data);
       setBirthday('select_year', 'select_month');
       lastday('select_year', 'select_month', 'select_day');
       setNationality();
       // setCity();
    })
+
+   function countLog(data) {
+      var ip, date, time, agent, browser, device;
+      ip = data['ip']
+      date = data['date'];
+      time = data['time'];
+      agent = data['agent'];
+      browser = data['browser'];
+      device = data['device'];
+
+      $.ajax({
+         url: '../ajax/ajax.php',
+         type:'post',
+         dataType:'json',
+         data:{
+            type:"count_log",
+            ip:ip,
+            date:date,
+            time:time,
+            agent:agent,
+            browser:browser,
+            device:device,
+            table:'counter_log'
+         },
+         success: function(data) {
+            if(data.result == "true") {
+               console.log(data);
+            } else {
+               $('.preloader').hide();
+               open_alert_popup(data.message, '', 2000);
+            }
+         }, error:function(request,status,error) {
+            $('.preloader').hide();
+             // alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+         }
+      });
+   }
 
    // 입력 데이터 저장
    function inputData() {
